@@ -1,0 +1,97 @@
+-- =====================================================
+-- REVIEW & DELIVERY ANALYSIS
+-- =====================================================
+
+
+-- =====================================================
+-- Business Question:
+-- How is delivery performance associated with customer satisfaction?
+-- =====================================================
+
+SELECT
+    CASE
+        WHEN o.order_delivered_customer_date <= o.order_estimated_delivery_date
+            THEN 'On time'
+        ELSE 'Late'
+    END AS delivery_status,
+    COUNT(DISTINCT o.order_id) AS total_orders,
+    AVG(r.review_score) AS average_review_score
+FROM olist_orders_dataset AS o
+JOIN olist_order_reviews_dataset AS r
+    ON o.order_id = r.order_id
+WHERE o.order_delivered_customer_date IS NOT NULL
+  AND o.order_estimated_delivery_date IS NOT NULL
+GROUP BY delivery_status
+ORDER BY average_review_score DESC;
+
+
+-- Result:
+-- 88,168 orders were delivered on time,
+-- with an average review score of 4.2936.
+-- 7,662 orders were delivered late,
+-- with an average review score of 2.5665.
+-- Late deliveries were associated with a substantially lower
+-- average review score.
+
+
+-- Business Insight:
+-- On-time deliveries were associated with higher customer
+-- satisfaction, while late deliveries were associated with
+-- lower review scores.
+-- This suggests that delivery performance is an important
+-- factor to investigate when analyzing customer satisfaction.
+-- However, this analysis shows an association and does not
+-- prove that late delivery directly caused lower review scores.
+
+-- =====================================================
+-- Business Question:
+-- How does customer satisfaction vary by delivery status?
+-- =====================================================
+
+SELECT
+    delivery_status,
+    AVG(review_score) AS average_review_score
+FROM (
+    SELECT
+        r.review_score,
+        CASE
+            WHEN o.order_delivered_customer_date IS NULL
+                 OR o.order_estimated_delivery_date IS NULL
+                THEN NULL
+            WHEN DATEDIFF(
+                o.order_delivered_customer_date,
+                o.order_estimated_delivery_date
+            ) < 0
+                THEN 'Early'
+            WHEN DATEDIFF(
+                o.order_delivered_customer_date,
+                o.order_estimated_delivery_date
+            ) = 0
+                THEN 'On time'
+            ELSE 'Late'
+        END AS delivery_status
+    FROM olist_orders_dataset AS o
+    JOIN olist_order_reviews_dataset AS r
+        ON o.order_id = r.order_id
+) AS delivery_analysis
+GROUP BY delivery_status
+ORDER BY average_review_score DESC;
+
+
+-- Result:
+-- Early deliveries had an average review score of 4.2936.
+-- On-time deliveries had an average review score of 4.0333.
+-- Late deliveries had an average review score of 2.2711.
+-- NULL represents orders with missing delivery information,
+-- with an average review score of 1.7613.
+-- Business Insight:
+-- Early and on-time deliveries were associated with higher
+-- average review scores, while late deliveries were associated
+-- with a substantially lower average review score.
+-- Orders with missing delivery information were also identified
+-- through the NULL category.
+-- This suggests a relationship between delivery performance
+-- and customer satisfaction.
+-- However, this analysis shows an association and does not
+-- prove that delivery delays directly caused lower review scores.
+

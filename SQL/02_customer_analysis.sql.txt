@@ -1,0 +1,83 @@
+-- =====================================================
+-- CUSTOMER ANALYSIS
+-- =====================================================
+
+-- Business Question:
+-- How many orders does each customer place?
+SELECT
+    customer_id,
+    COUNT(*) AS total_orders
+FROM olist_orders_dataset
+GROUP BY customer_id;
+-- Result:
+-- Most customer_id values are associated with a single order.
+-- This analysis provides the number of orders associated
+-- with each customer_id.
+-- Business Insight:
+-- The analysis shows that most customer_id values are linked
+-- to a single order. A separate customer-level identifier
+-- is needed to accurately identify repeat customers.
+
+-- =====================================================
+-- Business Question:
+-- How many customers placed more than one order?
+-- =====================================================
+
+-- Query 1: Identify customers who placed more than one order
+
+SELECT
+    olist_customers_dataset.customer_unique_id,
+    COUNT(*) AS total_orders
+FROM olist_orders_dataset
+JOIN olist_customers_dataset
+    ON olist_orders_dataset.customer_id = olist_customers_dataset.customer_id
+GROUP BY olist_customers_dataset.customer_unique_id
+HAVING COUNT(*) > 1;
+
+
+-- Query 2: Count the total number of repeat customers
+
+SELECT COUNT(*) AS repeat_customers
+FROM (
+    SELECT olist_customers_dataset.customer_unique_id
+    FROM olist_orders_dataset
+    JOIN olist_customers_dataset
+        ON olist_orders_dataset.customer_id = olist_customers_dataset.customer_id
+    GROUP BY olist_customers_dataset.customer_unique_id
+    HAVING COUNT(*) > 1
+) AS repeat_customers;
+
+
+-- Result:
+-- 2,997 customers placed more than one order.
+
+
+-- Business Insight:
+-- The analysis identified 2,997 repeat customers,
+-- showing that a portion of customers made multiple purchases.
+
+-- =====================================================
+-- Business Question:
+-- Which cities have the most customers?
+-- =====================================================
+
+SELECT
+    customer_city,
+    COUNT(DISTINCT customer_unique_id) AS total_customers
+FROM olist_customers_dataset
+GROUP BY customer_city
+ORDER BY total_customers DESC;
+
+
+-- Result:
+-- São Paulo had the highest number of customers,
+-- with 14,984 customers.
+-- It was followed by Rio de Janeiro with 6,620 customers.
+-- Belo Horizonte ranked third with 2,672 customers.
+
+
+-- Business Insight:
+-- Customer distribution is highly concentrated in a few major cities.
+-- São Paulo represents the largest customer concentration,
+-- followed by Rio de Janeiro and Belo Horizonte.
+

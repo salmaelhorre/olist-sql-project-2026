@@ -1,0 +1,48 @@
+-- =====================================================
+-- PAYMENT ANALYSIS
+-- =====================================================
+
+-- Business Question:
+-- Which payment methods are most commonly used?
+SELECT
+    payment_type,
+    COUNT(*) AS total_payments
+FROM olist_order_payments_dataset
+GROUP BY payment_type
+ORDER BY total_payments DESC;
+
+
+-- Result:
+-- Credit card was the most commonly used payment method.
+-- The other payment methods recorded lower numbers of
+-- payment records.
+
+-- Business Insight:
+-- Credit card is the dominant payment method in the dataset,
+-- indicating that it is the most frequently recorded payment
+-- method among Olist transactions.
+
+-- =====================================================
+-- Business Question:
+-- How many payment installments are most commonly used?
+-- =====================================================
+
+SELECT
+    payment_installments,
+    COUNT(*) AS payment_records
+FROM olist_order_payments_dataset
+GROUP BY payment_installments
+ORDER BY payment_records DESC;
+
+
+-- Result:
+-- One-installment payments were the most common,
+-- with 52,546 payment records.
+-- Two-installment payments followed with 12,413 records,
+-- while three-installment payments accounted for 10,461 records.
+
+
+-- Business Insight:
+-- Most payment records use a single installment,
+-- while the number of payment records generally decreases
+-- as the number of installments increases.

@@ -1,2 +1,244 @@
-# olist-sql-project-2026
-e-commerce data analysis using sql and MySQL
+\# Olist E-commerce SQL Analysis
+
+
+
+\## Project Overview
+
+
+
+This project analyzes the Olist e-commerce dataset using SQL to understand sales performance, customer behavior, payment methods, product categories, and customer satisfaction.
+
+
+
+The analysis focuses on identifying business patterns in orders, revenue, customers, payments, products, and delivery performance.
+
+
+
+\## Business Objective
+
+
+
+The main objective is to analyze e-commerce performance and identify insights that can help the business better understand its customers, products, sales, payments, and delivery performance.
+
+
+
+\## Tools \& Technologies
+
+
+
+\- MySQL
+
+\- MySQL Workbench
+
+\- SQL
+
+\- Olist E-commerce Dataset
+
+\## Project Structure
+
+
+
+```text
+
+olist\_Ecommerce\_sql\_Analysis/
+
+├── README.md
+
+├── SQL/
+
+│   ├── 01\_sales\_analysis.sql
+
+│   ├── 02\_customer\_analysis.sql
+
+│   ├── 03\_payment\_analysis.sql
+
+│   ├── 04\_review\_delivery\_analysis.sql
+
+│   └── 05\_product\_category\_analysis.sql
+
+├── analysis/
+
+│   └── business\_insights.md
+
+└── images/
+
+&#x20;   ├── 01\_monthly\_orders.png
+
+&#x20;   ├── 02\_monthly\_revenue.png
+
+&#x20;   ├── 03\_top\_products.png
+
+&#x20;   ├── 04\_repeat\_customers.png
+
+&#x20;   ├── 05\_payment\_methods.png
+
+&#x20;   ├── 06\_category\_revenue.png
+
+&#x20;   ├── 07\_category\_sales\_volume.png
+
+&#x20;   └── 08\_delivery\_customer\_satisfaction.png
+
+
+
+\## Key Findings
+
+
+
+\### Sales Performance
+
+
+
+\- Order volume increased substantially from 2016 to 2017 and remained generally high throughout 2018.
+
+\- The highest monthly revenue recorded in the analysis was approximately 1.01 million in November 2017.
+
+\- A sharp decline in order volume was observed in September and October 2018.
+
+\- A sharp decline in revenue was observed in September 2018.
+
+
+
+\### Customer Analysis
+
+
+
+\- 2,997 customers placed more than one order.
+
+\- Customer distribution was concentrated in major cities.
+
+\- São Paulo had the highest number of customers, with 14,984, followed by Rio de Janeiro with 6,620 and Belo Horizonte with 2,672.
+
+
+
+\### Payment Analysis
+
+
+
+\- Credit card was the most commonly recorded payment method.
+
+\- One-installment payments were the most common, with 52,546 payment records.
+
+
+
+\### Product \& Category Analysis
+
+
+
+\- Cama, Mesa e Banho had the highest sales volume, with 11,115 items sold.
+
+\- Beleza \& Saúde generated the highest category revenue, at approximately 1.26 million.
+
+\- Product categories differed considerably in their average item prices.
+
+\- PCs had an average item price of approximately 1,098.34.
+
+
+
+\### Review \& Delivery Analysis
+
+
+
+\- Early deliveries had an average review score of 4.2936.
+
+\- On-time deliveries had an average review score of 4.0333.
+
+\- Late deliveries had a substantially lower average review score of 2.2711.
+
+\- Orders with missing delivery information were identified through the NULL category.
+
+
+
+\## Business Interpretation
+
+
+
+The analysis shows strong overall e-commerce activity, with important differences across customers, payment methods, product categories, and delivery performance.
+
+
+
+Delivery performance appears to be an important area to investigate because late deliveries were associated with substantially lower customer review scores. The analysis also highlights major customer markets and product categories that can help the business understand where demand and revenue are concentrated.
+
+
+
+These findings represent associations observed in the dataset and do not necessarily prove causal relationships.
+
+
+
+\## Analysis Screenshots
+
+
+
+\### Monthly Orders
+
+
+
+!\[Monthly Orders](images/01\_monthly\_orders.png)
+
+
+
+\### Monthly Revenue
+
+
+
+!\[Monthly Revenue](images/02\_monthly\_revenue.png)
+
+
+
+\### Top Products
+
+
+
+!\[Top Products](images/03\_top\_products.png)
+
+
+
+\### Repeat Customers
+
+
+
+!\[Repeat Customers](images/04\_repeat\_customers.png)
+
+
+
+\### Payment Methods
+
+
+
+!\[Payment Methods](images/05\_payment\_methods.png)
+
+
+
+\### Revenue by Category
+
+
+
+!\[Revenue by Category](images/06\_category\_revenue.png)
+
+
+
+\### Sales Volume by Category
+
+
+
+!\[Sales Volume by Category](images/07\_category\_sales\_volume.png)
+
+
+
+\### Delivery \& Customer Satisfaction
+
+
+
+!\[Delivery \& Customer Satisfaction](images/08\_delivery\_customer\_satisfaction.png)
+
+
+
+
+
+
+
+
+
+
+
+
+

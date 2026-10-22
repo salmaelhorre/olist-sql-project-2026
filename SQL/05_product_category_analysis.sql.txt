@@ -1,0 +1,94 @@
+-- =====================================================
+-- PRODUCT & CATEGORY ANALYSIS
+-- =====================================================
+
+
+-- =====================================================
+-- Business Question:
+-- Which product categories sell the most?
+-- =====================================================
+
+SELECT
+    p.product_category_name,
+    COUNT(oi.price) AS sales_volume
+FROM olist_order_items_dataset AS oi
+JOIN olist_products_dataset AS p
+    ON oi.product_id = p.product_id
+GROUP BY p.product_category_name
+ORDER BY sales_volume DESC;
+
+
+-- Result:
+-- Cama, Mesa e Banho recorded the highest sales volume
+-- with 11,115 items sold.
+-- It was followed by Beleza & Saúde with 9,670 items
+-- and Esporte & Lazer with 8,641 items.
+
+
+-- Business Insight:
+-- Cama, Mesa e Banho had the highest sales volume among
+-- the product categories analyzed, indicating strong demand
+-- for products in this category.
+
+
+-- =====================================================
+-- Business Question:
+-- Which product categories generate the most revenue?
+-- =====================================================
+
+SELECT
+    p.product_category_name,
+    SUM(oi.price) AS revenue
+FROM olist_order_items_dataset AS oi
+JOIN olist_products_dataset AS p
+    ON oi.product_id = p.product_id
+GROUP BY p.product_category_name
+ORDER BY revenue DESC;
+
+
+-- Result:
+-- Beleza & Saúde generated the highest revenue,
+-- with approximately 1.26 million in revenue.
+-- Relógios & Presentes followed with approximately
+-- 1.21 million, while Cama, Mesa e Banho generated
+-- approximately 1.04 million.
+
+
+-- Business Insight:
+-- The category with the highest sales volume was not the
+-- same as the category with the highest revenue.
+-- This shows that sales volume and revenue provide
+-- different perspectives on product category performance.
+
+
+-- =====================================================
+-- Business Question:
+-- What is the average price per item for each product category?
+-- =====================================================
+
+SELECT
+    p.product_category_name,
+    COUNT(oi.price) AS sales_volume,
+    SUM(oi.price) / COUNT(oi.price) AS average_price
+FROM olist_order_items_dataset AS oi
+JOIN olist_products_dataset AS p
+    ON oi.product_id = p.product_id
+GROUP BY p.product_category_name
+ORDER BY average_price DESC;
+
+
+-- Result:
+-- Average item prices varied considerably across product
+-- categories.
+-- For example, PCs had an average price of approximately
+-- 1,098.34, while Relógios & Presentes had an average
+-- price of approximately 201.14.
+-- Cama, Mesa e Banho had an average price of approximately
+-- 93.30.
+
+
+-- Business Insight:
+-- Product categories differ substantially in their average
+-- item prices. Therefore, categories with high sales volume
+-- are not necessarily the categories with the highest
+-- average-priced products.

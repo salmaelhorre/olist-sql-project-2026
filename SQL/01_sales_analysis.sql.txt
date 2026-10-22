@@ -1,0 +1,81 @@
+-- =====================================================
+-- SALES PERFORMANCE ANALYSIS
+-- =====================================================
+
+-- Business Question:
+-- How many orders do we have per month?
+SELECT
+    MONTH(order_purchase_timestamp) AS month,
+    YEAR(order_purchase_timestamp) AS year,
+    COUNT(*) AS total_orders
+FROM olist_orders_dataset
+GROUP BY month, year
+ORDER BY year, month;
+-- Result:
+-- Order volume increased significantly from 2016 to 2017
+-- and remained generally high throughout 2018.
+-- A sharp decline was observed in September and October 2018.
+-- Business Insight:
+-- The overall order volume shows strong growth over the period,
+-- although the sharp decline in September and October 2018
+-- should be investigated further.
+
+-- =====================================================
+-- Business Question:
+-- Which products sell the most?
+-- =====================================================
+
+SELECT
+    product_id,
+    COUNT(*) AS total_sold
+FROM olist_order_items_dataset
+GROUP BY product_id
+ORDER BY total_sold DESC
+LIMIT 10;
+
+
+-- Result:
+-- The top-selling product was sold 527 times,
+-- followed by other products with lower sales volumes.
+-- The second and third top-selling products recorded
+-- 488 and 484 units sold, respectively.
+
+
+-- Business Insight:
+-- The analysis shows that a small group of products
+-- accounts for the highest sales volumes.
+-- The top-selling product recorded 527 units sold,
+-- indicating strong demand compared with other products.
+
+-- =====================================================
+-- Business Question:
+-- How much revenue do we generate per month?
+-- =====================================================
+
+SELECT
+    YEAR(o.order_purchase_timestamp) AS year,
+    MONTH(o.order_purchase_timestamp) AS month,
+    SUM(oi.price) AS total_revenue
+FROM olist_order_items_dataset AS oi
+JOIN olist_orders_dataset AS o
+    ON oi.order_id = o.order_id
+GROUP BY year, month
+ORDER BY year, month;
+
+
+-- Result:
+-- Revenue increased substantially during 2017 and remained
+-- at a high level throughout most of 2018.
+-- November 2017 recorded approximately 1.01 million in revenue.
+-- A sharp decline in revenue was observed in September 2018.
+
+
+-- Business Insight:
+-- The analysis shows strong revenue growth over the period,
+-- with monthly revenue reaching high levels during 2017 and 2018.
+-- The sharp decline observed in September 2018 should be
+-- investigated further.
+
+
+
+
